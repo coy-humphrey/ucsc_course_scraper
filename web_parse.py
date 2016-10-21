@@ -19,4 +19,8 @@ def professors( course ):
              p in course.find_next('tr').find_all('td')
              if p.find_next('br') ]
 
+# For now we just download a single course page,
+# rename it to ucsc.html, and test with it
+# Future plan is to take a list of filenames in
+# argv, parse each file and dump into same csv
 parse_classes( open('ucsc.html') )
