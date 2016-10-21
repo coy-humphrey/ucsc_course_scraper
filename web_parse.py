@@ -15,10 +15,17 @@ def course_name( course ):
     return course.find_next('a').contents[0]
 
 def professors( course ):
-    return { a.contents[0]:  a.next_sibling.next_sibling.strip() 
-             for td in course.find_next('tr').find_all('td')
-             for a in td.find_all('a')
-             if td.get('class') and len( td.get('class') ) == 1 }
+    result = {}
+    quarters = ['fall', 'winter', 'spring', 'summer']
+    for quarter, listing in zip(quarters, course.find_next('tr').find_all('td')):
+        result[quarter] = { a.contents[0]: a.next_sibling.next_sibling.strip()
+                            for a in listing.find_all('a')
+                            if listing.get('class') and len(listing.get('class') ) == 1 }
+    return result
+    # return { a.contents[0]:  a.next_sibling.next_sibling.strip() 
+    #          for td in course.find_next('tr').find_all('td')
+    #          for a in td.find_all('a')
+    #          if td.get('class') and len( td.get('class') ) == 1 }
 
 # For now we just download a single course page,
 # rename it to ucsc.html, and test with it
