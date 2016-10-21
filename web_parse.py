@@ -19,9 +19,4 @@ def professors( course ):
              p in course.find_next('tr').find_all('td')
              if p.find_next('br') ]
 
-response = urllib2.urlopen('http://courses.soe.ucsc.edu/courses/cmps')
-html = response.read()
-htmlfile = open('ucsc.html')
-html2 = htmlfile.read()
-
-parse_classes( html )
+parse_classes( open('ucsc.html') )
