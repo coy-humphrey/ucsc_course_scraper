@@ -17,7 +17,7 @@ def courses( soup ):
 # Format is: COURSENUMBER: Full Course Name
 def course_name( course ):
     name = str( course.find_next( 'a' ).contents[ 0 ] )
-    return name[ : name.find( ':' ) ]
+    return name[ : name.find( ':' ) ].upper()
 
 # Given a course, a 'tr' will contain 4 'td's, each 'td' representing a quarter.
 def professors( course ):
