@@ -15,7 +15,8 @@ def courses( soup ):
 # web page, with the link title being the full name of the course
 # Format is: COURSENUMBER: Full Course Name
 def course_name( course ):
-    return course.find_next( 'a' ).contents[ 0 ]
+    name = str( course.find_next( 'a' ).contents[ 0 ] )
+    return name[ : name.find( ':' ) ]
 
 # Given a course, a 'tr' will contain 4 'td's, each 'td' representing a quarter.
 def professors( course ):
@@ -55,8 +56,9 @@ def page_year( soup ):
 # Future plan is to take a list of filenames in
 # argv, parse each file and dump into same csv
 results = {}
-parse_classes( open( 'cmps' ), results )
+parse_classes( open( 'cmpe' ), results )
 
 for year, classes in results.items():
+    print year
     for quarter, professors in classes.items():
         print quarter, professors
