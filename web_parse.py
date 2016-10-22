@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from collections import OrderedDict
 import json
+import sys
 
 def parse_classes( html_contents, results ):
     soup = BeautifulSoup( html_contents, 'html.parser' )
@@ -53,11 +54,16 @@ def page_year( soup ):
     end_i = title.find('|') - 1
     return int(title[end_i-4:end_i])
 
-# For now we just manually download a single course page,
-# rename it to ucsc.html, and test with it
-# Future plan is to take a list of filenames in
-# argv, parse each file and dump into same csv
-results = OrderedDict()
-parse_classes( open( 'cmpe' ), results )
+# Takes a list of filenames as arguments. Parsed each file in the list
+# and dumps json dict of all years/classes/profs read.
+def main():
+    results = OrderedDict()
+    for fname in sys.argv[1:]:
+        with open( fname ) as f:
+            parse_classes( f, results )
+    print json.dumps( results, indent=4 )
 
-print json.dumps( results, indent=4 )
+if __name__ == '__main__':
+    main()
+
+
