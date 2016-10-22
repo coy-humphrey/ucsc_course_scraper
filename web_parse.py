@@ -5,7 +5,7 @@ import json
 def parse_classes( html_contents, results ):
     soup = BeautifulSoup( html_contents, 'html.parser' )
     year = page_year( soup )
-    results[year] = OrderedDict()
+    results[year] = results.get( year, OrderedDict() )
     for course in courses( soup ):
         results[ year ][ course_name( course ) ] = professors( course )
 
@@ -15,6 +15,7 @@ def courses( soup ):
 # Given a course, the first a element will be a link to the course
 # web page, with the link title being the full name of the course
 # Format is: COURSENUMBER: Full Course Name
+# Therefore, if we grab everything before the :, we will have the course number
 def course_name( course ):
     name = str( course.find_next( 'a' ).contents[ 0 ] )
     return name[ : name.find( ':' ) ].upper()
