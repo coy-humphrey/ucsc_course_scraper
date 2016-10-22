@@ -1,10 +1,11 @@
 from bs4 import BeautifulSoup
-import urllib2
+from collections import OrderedDict
+import json
 
 def parse_classes( html_contents, results ):
     soup = BeautifulSoup( html_contents, 'html.parser' )
     year = page_year( soup )
-    results[year] = {}
+    results[year] = OrderedDict()
     for course in courses( soup ):
         results[ year ][ course_name( course ) ] = professors( course )
 
@@ -20,7 +21,7 @@ def course_name( course ):
 
 # Given a course, a 'tr' will contain 4 'td's, each 'td' representing a quarter.
 def professors( course ):
-    result = {}
+    result = OrderedDict()
     quarters = [ 'fall', 'winter', 'spring', 'summer' ]
     for quarter, listing in zip( quarters, course_listings( course ) ):
         result[quarter] = { section_name( section ): section_professor_name( section )
@@ -55,10 +56,7 @@ def page_year( soup ):
 # rename it to ucsc.html, and test with it
 # Future plan is to take a list of filenames in
 # argv, parse each file and dump into same csv
-results = {}
+results = OrderedDict()
 parse_classes( open( 'cmpe' ), results )
 
-for year, classes in results.items():
-    print year
-    for quarter, professors in classes.items():
-        print quarter, professors
+print json.dumps( results, indent=4 )
