@@ -23,12 +23,15 @@ def process_course( row ):
         subject = row[ 0 ]
         number = row[ 1 ].split()[ 0 ]
         name = ' '.join( row[ 1 ].split()[ 1: ] )
+    if name == '':
+        name = row[ 2 ]
     gradeInfo = row[ 4 ].split()
     if len( gradeInfo ) != 2:
         grade = 'N/A'
     else:
         grade = gradeInfo[ 1 ]
-    return Course( subject, number, name, [ '' ], grade )
+    units = row[ 3 ]
+    return Course( subject, number, name, [ '' ], grade, units )
 
 def student_from_transcript( input ):
     student = None

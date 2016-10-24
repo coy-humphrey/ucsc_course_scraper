@@ -20,7 +20,7 @@ print 'Name: ' + student.name
 for quarter in student.quarters:
     print '\n----- ' + quarter.name + ' -----\n'
     for course in quarter.courses:
-        print '  %s\t%s\t%s\t%s\t%s' % \
-            ( course.subject, course.number, course.grade, 
+        print '  %s\t%s\t%s\t%s\t%s\t%s' % \
+            ( course.subject, course.number, course.units, course.grade, 
               course.name, ' | '.join( course.instructors ) )
 print '\n'
