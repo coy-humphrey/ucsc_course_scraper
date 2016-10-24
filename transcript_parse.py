@@ -10,10 +10,8 @@ def process_name( row ):
     return Student( fullName )
 
 def process_gpa( row, student ):
-    if row[ 1 ] == '':
-        student.gpa = row[ 2 ].split()[ 0 ]
-    else:
-        student.gpa = row[ 1 ].split()[ 0 ]
+    longRow = ' '.join( row )
+    student.gpa = longRow.split()[ 3 ]
 
 def process_quarter( row ):
     quarterInfo = row[ 2 ].split()
