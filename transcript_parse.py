@@ -1,7 +1,7 @@
 import csv
 from ucsc_types import Student, Quarter, Course
 
-subjects = [ 'CMPS', 'CMPE', 'MATH', 'AMS', 'CMPM' ]
+subjects = [ 'CMPS', 'CMPE', 'EE', 'MATH', 'AMS', 'CMPM' ]
 
 def process_name( row ):
     lastName = row[ 0 ].split( ',' )[ 0 ].split( ':' )[ 1 ]
