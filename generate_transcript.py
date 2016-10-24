@@ -17,6 +17,7 @@ with open( course_dict_filename ) as data_file:
 student = student_combined( student, course_dict )
 
 print 'Name: ' + student.name
+print 'GPA: ' + student.gpa
 for quarter in student.quarters:
     print '\n----- ' + quarter.name + ' -----\n'
     for course in quarter.courses:
