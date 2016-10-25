@@ -17,10 +17,11 @@ with open( course_dict_filename ) as data_file:
 student = student_combined( student, course_dict )
 
 print 'Name: ' + student.name
+print 'GPA: ' + student.gpa
 for quarter in student.quarters:
     print '\n----- ' + quarter.name + ' -----\n'
     for course in quarter.courses:
-        print '  %s\t%s\t%s\t%s\t%s\t%s' % \
-            ( course.subject, course.number, course.units, course.grade, 
-              course.name, ' | '.join( course.instructors ) )
+        print '  %s%s%s%s%s%s' % \
+            ( course.subject.ljust( 6 ), course.number.ljust( 7 ), course.units.ljust( 8 ), 
+              course.grade.ljust( 7 ), course.name.ljust( 25 ), ' | '.join( course.instructors ) )
 print '\n'
